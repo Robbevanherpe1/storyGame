@@ -146,9 +146,13 @@ class GameWindow(QMainWindow):
             # Typing effect completed
             pass
 
-    def submit_choice(self):
+    def submit_choice(self, continue_story=False):
         """Handle the user's choice submission."""
-        user_input = self.entry.text()
+        if continue_story:
+            user_input = "Continue"
+        else:
+            user_input = self.entry.text()
+        
         if user_input:
             self.show_text_typing_effect(f"\n> {user_input}", use_typing=False)
             self.entry.clear()
@@ -156,14 +160,12 @@ class GameWindow(QMainWindow):
 
     def continue_story(self):
         """Let the AI continue generating the story without user input."""
-        self.show_text_typing_effect("\n> Continue...", use_typing=False)
-
         try:
-            ai_generated_text = generate_ai_response("Continue the story")  # Make sure generate_ai_response works
-            self.show_text_typing_effect(ai_generated_text, use_typing=False)
+            # Reuse the submit_choice method to handle continuation
+            self.submit_choice(continue_story=True)
         except Exception as e:
             print(f"Error generating AI response: {e}")
-            self.show_text_typing_effect("An error occurred while generating the AI response.", use_typing=False)
+            self.show_text_typing_effect("An error occurred while generating the story.", use_typing=False)
 
 def main():
     app = QApplication(sys.argv)
