@@ -7,14 +7,14 @@ from game.game_logic import Game, Player
 from ai.ai_interface import generate_ai_response
 
 # Disable GPU hardware acceleration for Qt rendering
-os.environ["QT_QUICK_BACKEND"] = "software"
+#os.environ["QT_QUICK_BACKEND"] = "software"
 
 class GameWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
         # Window Configuration
-        self.setWindowTitle("AI-Powered Adventure Game")
+        self.setWindowTitle("Infinite StoryWeaver")
         self.setGeometry(100, 100, 750, 550)
         self.setStyleSheet("background-color: #1e1e1e;")  # Dark background
 
